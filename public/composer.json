@@ -8,7 +8,11 @@
         "silverstripe/recipe-cms": "4.4.3@stable",
         "silverstripe-themes/simple": "~3.2.0",
         "vulcandigital/silverstripe-scraper": "dev-master",
-        "lekoala/silverstripe-simple-jobs": "dev-master"
+        "lekoala/silverstripe-simple-jobs": "dev-master",
+        "entidi/feedreader": "^2.0",
+        "entidi/silverstripe-autotoc": "^2.0",
+        "symfony/dom-crawler": "^4.3",
+        "symfony/css-selector": "^4.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
