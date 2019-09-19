@@ -10,6 +10,10 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\View\ArrayData;
 use SimpleXMLElement;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\CssSelector;
+use SilverStripe\Dev\Debug;
+use SilverStripe\Dev\Backtrace;
 
 class ScrapReaderService
 {
@@ -129,22 +133,56 @@ class ScrapReaderService
     {
         $cache = self::getCache();
         $key   = $this->getKey();
-        if ($cache->has($key)) {
+        $cached = $cache->has($key);
+        if (false) {
             $items = $cache->get($key);
         } else {
-            $client   = new Client($this->options + [ 'timeout' => 2 ]);
-            $response = $client->request('GET', $this->url);
+
+            $client   = new Client($this->options + [ 'timeout' => 0 ]);
+            $userAgent = 'Mozilla/5.0 (Windows NT 10.0)'
+                . ' AppleWebKit/537.36 (KHTML, like Gecko)'
+                . ' Chrome/48.0.2564.97'
+                . ' Safari/537.36';
+            $response = $client->request('GET', $this->url, [
+                'headers' => [
+                'User-Agent' => $userAgent,
+                ]]  );
+
+
             $code     = $response->getStatusCode();
             $data     = $response->getBody()->getContents();
             if ($code != 200) {
                 user_error("RSS fetch error ($code). The response body is '$data'", E_USER_ERROR);
             }
+            $crawler = new Crawler($data);
 
-            $xml = new SimpleXMLElement($data);
+            $filter = 'body';
+            $table = $crawler
+                ->filter($filter)
+                ->each(function (Crawler $node) {
+                    return $node->html();
+                });
+            unset($crawler);
             $items = new ArrayList();
-            $this->appendRSS2Items($items, $xml);
-            $this->appendAtom1Items($items, $xml);
+
+            foreach ($table as $node) {
+                $content = (string) $node;
+
+                $row = new ArrayData([
+                    'Content' => $content,
+                ]);
+                $items->push($row);
+            }
+            Debug::show($table);
+
             $cache->set($key, $items, $this->expiration);
+            /*
+                        $xml = new SimpleXMLElement($data);
+                        $items = new ArrayList();
+                        $this->appendRSS2Items($items, $xml);
+                        $this->appendAtom1Items($items, $xml);
+                        $cache->set($key, $items, $this->expiration);*/
+
         }
         return $items;
     }

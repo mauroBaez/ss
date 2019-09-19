@@ -1,0 +1,5 @@
+{
+    "require": {
+        "fromholdio/silverstripe-externalurlfield": "*@stable"
+    }
+}

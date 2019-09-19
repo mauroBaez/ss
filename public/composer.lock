@@ -268,16 +268,16 @@
         },
         {
             "name": "embed/embed",
-            "version": "v3.4.1",
+            "version": "v3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oscarotero/Embed.git",
-                "reference": "960bbd5a62c5697302bd5394d58efba2e998b787"
+                "reference": "dc1dc3c126f8a78acdae06b83f591c0728ea131d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oscarotero/Embed/zipball/960bbd5a62c5697302bd5394d58efba2e998b787",
-                "reference": "960bbd5a62c5697302bd5394d58efba2e998b787",
+                "url": "https://api.github.com/repos/oscarotero/Embed/zipball/dc1dc3c126f8a78acdae06b83f591c0728ea131d",
+                "reference": "dc1dc3c126f8a78acdae06b83f591c0728ea131d",
                 "shasum": ""
             },
             "require": {
@@ -303,9 +303,9 @@
             "authors": [
                 {
                     "name": "Oscar Otero",
-                    "role": "Developer",
                     "email": "oom@oscarotero.com",
-                    "homepage": "http://oscarotero.com"
+                    "homepage": "http://oscarotero.com",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP library to retrieve page info using oembed, opengraph, etc",
@@ -317,7 +317,7 @@
                 "opengraph",
                 "twitter cards"
             ],
-            "time": "2019-07-20T17:05:41+00:00"
+            "time": "2019-09-16T19:34:02+00:00"
         },
         {
             "name": "entidi/feedreader",
@@ -1913,8 +1913,8 @@
                 },
                 {
                     "name": "Damian Mooyman",
-                    "email": "damian@silverstripe.com",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "damian@silverstripe.com"
                 }
             ],
             "description": "Module for running tasks with a standard cron timeschedule",

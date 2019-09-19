@@ -66,6 +66,7 @@ class ScrapReaderPage extends Page
 
         // When $count is null, limit() will use array_slice(..., 0, null)
         // internally, meaning a clone of $items will be returned
-        return $items->limit($count);
+        //return $items->limit($count);
+        return $items;
     }
 }
